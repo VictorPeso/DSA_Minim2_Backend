@@ -3,12 +3,10 @@ package edu.upc.dsa;
 import edu.upc.dsa.models.Objects;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.models.GameObject;
+import edu.upc.dsa.models.TeamRanking;
 import org.apache.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameManagerImpl implements GameManager {
     private static GameManager instance;
@@ -19,6 +17,7 @@ public class GameManagerImpl implements GameManager {
     protected Map<String, GameObject> registred_objects;
     protected List<GameObject> objects;
     final static Logger logger = Logger.getLogger(GameManagerImpl.class);
+    protected List<TeamRanking> ranking;
 
     private GameManagerImpl() {
         this.registred_users = new HashMap<>();
@@ -170,5 +169,33 @@ public class GameManagerImpl implements GameManager {
     public List<GameObject> getAllStoreObjects() {
         logger.info("Obteniendo todos los objetos de la tienda");
         return this.objects;
+    }
+
+    @Override
+    public List<TeamRanking> getTeamsRanking() {
+
+        ranking = new ArrayList<>();
+
+        ranking.add(new TeamRanking(
+                "Equipo1",
+                "http://10.0.2.2:8080/static/Equipo1_img.png",
+                250
+        ));
+
+        ranking.add(new TeamRanking(
+                "Equipo2",
+                "...",
+                200
+        ));
+
+        ranking.add(new TeamRanking(
+                "Equipo3",
+                "...",
+                120
+        ));
+
+        ranking.sort((a, b) -> b.getPoints() - a.getPoints());
+
+        return ranking;
     }
 }

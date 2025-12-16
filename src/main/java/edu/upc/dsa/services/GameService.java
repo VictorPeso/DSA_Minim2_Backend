@@ -4,6 +4,7 @@ import edu.upc.dsa.GameManager;
 import edu.upc.dsa.GameManagerImpl;
 import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.TeamRanking;
 
 import edu.upc.dsa.models.dto.Credentials;
 import edu.upc.dsa.models.dto.AddObject;
@@ -203,4 +204,25 @@ public class GameService {
             }
         }
     }
+
+    // ------------------- RANKING DE EQUIPOS -------------------
+
+    @GET
+    @Path("/teams/ranking")
+    @ApiOperation(value = "Obtener ranking de equipos")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = TeamRanking.class, responseContainer = "List")
+    })
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTeamsRanking() {
+
+        List<TeamRanking> ranking = this.gm.getTeamsRanking();
+
+        GenericEntity<List<TeamRanking>> entity =
+                new GenericEntity<List<TeamRanking>>(ranking) {};
+
+        return Response.status(Response.Status.OK).entity(entity).build();
+    }
+
+
 }

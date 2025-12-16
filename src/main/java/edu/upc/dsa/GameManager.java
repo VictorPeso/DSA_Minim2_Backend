@@ -3,6 +3,7 @@ package edu.upc.dsa;
 import edu.upc.dsa.models.GameObject;
 import edu.upc.dsa.models.Objects;
 import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.TeamRanking;
 
 import java.util.List;
 
@@ -29,4 +30,5 @@ public interface GameManager {
     public int getNumberOfUsersRegistered();
 
     public User getUser(String username);
+    public List<TeamRanking> getTeamsRanking();
 }
